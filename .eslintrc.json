@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "comma-dangle": ["error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "functions": "always-multiline"
+    }]
+  }
+}
