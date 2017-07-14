@@ -21,7 +21,7 @@ import styled from 'styled-components';
 const Text = styled.span``;
 
 export default MyComponent() {
-  return <FormattedDuration value={60} textComponent={Text} />
+  return <FormattedDuration seconds={60} textComponent={Text} />
   // will render `1 minute`
 }
 ```
@@ -36,7 +36,7 @@ import FormattedDuration from 'react-intl-formatted-duration';
 import { Text } from 'react-native';
 
 export default MyComponent() {
-  return <FormattedDuration value={60} textComponent={Text} />
+  return <FormattedDuration seconds={60} textComponent={Text} />
   // will render `1 minute`
 }
 ```
@@ -46,7 +46,7 @@ export default MyComponent() {
 If you want to style numbers differently from text you can pass a `valueComponent`
 
 ```js
-<FormattedDuration value={90} textComponent={Text} valueComponent={Value} />
+<FormattedDuration seconds={90} textComponent={Text} valueComponent={Value} />
 
 // renders
 
@@ -72,7 +72,7 @@ import { IntlProvider } from 'react-intl';
  */
 
 export default MyComponent() {
-  return <FormattedDuration value={600} textComponent={Text} valueComponent={FormattedNumber} />
+  return <FormattedDuration seconds={600} textComponent={Text} valueComponent={FormattedNumber} />
   // will render `１０分`
 }
 ```
