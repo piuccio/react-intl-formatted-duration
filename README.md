@@ -26,6 +26,8 @@ export default MyComponent() {
 }
 ```
 
+The default format only shows minutes and seconds. For more complex needs check the [custom format section](#Custom_format).
+
 It's not necessary to use styled components, you can use any component you like available on your target environment
 
 ```js
@@ -77,14 +79,63 @@ export default MyComponent() {
 }
 ```
 
+### Custom format
 
-### Timer format
+#### Hours and days
+
+By default the component only renders minutes and seconds, if you want to display hours or days you can use a custom format:
+
+```js
+<FormattedDuration seconds={180000} textComponent={Text} format="{days} {hours} {minutes} {seconds}" />
+// will render `2 days 2 hours`
+
+<FormattedDuration seconds={180000} textComponent={Text} format="{hours} {minutes} {seconds}" />
+// will render `50 hours`
+
+<FormattedDuration seconds={180000} textComponent={Text} format="{minutes} {seconds}" />
+// will render `3000 minutes`
+}
+```
+
+Seconds is also optional and if missing, minutes will be rounded to the closed value
+
+```js
+<FormattedDuration seconds={10} textComponent={Text} format="{minutes}" />
+// will render `0 minutes`
+
+<FormattedDuration seconds={30} textComponent={Text} format="{minutes}" />
+// will render `1 minute`
+
+<FormattedDuration seconds={70} textComponent={Text} format="{minutes}" />
+// will render `1 minute`
+```
+
+The custom format can itself be localized by passing a message id instead of the actual value
+
+```js
+import React from 'react';
+import FormattedDuration from 'react-intl-formatted-duration';
+
+import messages from './messages';
+
+export default MyComponent() {
+  return (
+    <FormattedDuration
+      seconds={600}
+      textComponent={Text}
+      format={messages.customFormat.id}
+    />
+  );
+}
+```
+
+#### Timer format
 
 ```js
 import FormattedDuration, { TIMER_FORMAT } from 'react-intl-formatted-duration';
 
 export default MyComponent() {
-  return <FormattedDuration value={60} textComponent={Text} format={TIMER_FORMAT} />
+  return <FormattedDuration seconds={60} textComponent={Text} format={TIMER_FORMAT} />
   // will render `1:00`
 }
 ```
@@ -96,6 +147,10 @@ export default MyComponent() {
 * `react-intl-formatted-duration.longFormatting` the default format that generates something like `1 minute 30 seconds`. It uses the values `{minutes}` and `{seconds}`. For example you can change it to `{minutes} and {seconds}`.
 * `react-intl-formatted-duration.duration` the format used by the `minutes` and `seconds` variables described above. It uses the values `{value}` and `{unit}`. The default is `{value} {unit}` where `value` is a number and `{unit}` is the textual unit like `minute(s)` or `second(s)`.
 * `react-intl-formatted-duration.timerFormatting` format for `TIMER_FORMAT`, defaults to `{minutes}:{seconds}` where both values are numbers padded to have a minimum length of 2 characters
+* `react-intl-formatted-duration.daysPlural` string for plural days
+* `react-intl-formatted-duration.daysSingular` string for singular days
+* `react-intl-formatted-duration.hoursPlural` string for plural hours
+* `react-intl-formatted-duration.hoursSingular` string for singular hours
 * `react-intl-formatted-duration.minutesPlural` string for plural minutes
 * `react-intl-formatted-duration.minutesSingular` string for singular minutes
 * `react-intl-formatted-duration.secondsPlural` string for plural seconds

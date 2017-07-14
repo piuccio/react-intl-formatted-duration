@@ -18,6 +18,22 @@ export default defineMessages({
     id: 'react-intl-formatted-duration.timerFormatting',
     defaultMessage: '{minutes}:{seconds}',
   },
+  daysPlural: {
+    id: 'react-intl-formatted-duration.daysPlural',
+    defaultMessage: 'days',
+  },
+  daysSingular: {
+    id: 'react-intl-formatted-duration.daysSingular',
+    defaultMessage: 'day',
+  },
+  hoursPlural: {
+    id: 'react-intl-formatted-duration.hoursPlural',
+    defaultMessage: 'hours',
+  },
+  hoursSingular: {
+    id: 'react-intl-formatted-duration.hoursSingular',
+    defaultMessage: 'hour',
+  },
   minutesPlural: {
     id: 'react-intl-formatted-duration.minutesPlural',
     defaultMessage: 'minutes',
