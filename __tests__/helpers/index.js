@@ -8,5 +8,5 @@ function Text(props) {
 }
 
 export function text(value, format) {
-  return mountWithIntl(<DurationMessage seconds={value} format={format} textComponent={Text} />).text().trim();
+  return mountWithIntl(<DurationMessage seconds={value} format={format} textComponent={Text} />).text().trim().replace(/\s+/g, ' ');
 }
