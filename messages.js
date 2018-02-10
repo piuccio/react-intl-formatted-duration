@@ -18,36 +18,20 @@ export default defineMessages({
     id: 'react-intl-formatted-duration.timerFormatting',
     defaultMessage: '{minutes}:{seconds}',
   },
-  daysPlural: {
-    id: 'react-intl-formatted-duration.daysPlural',
-    defaultMessage: 'days',
+  daysUnit: {
+    id: 'react-intl-formatted-duration.daysUnit',
+    defaultMessage: '{value, plural, one {day} other {days}}',
   },
-  daysSingular: {
-    id: 'react-intl-formatted-duration.daysSingular',
-    defaultMessage: 'day',
+  hoursUnit: {
+    id: 'react-intl-formatted-duration.hoursUnit',
+    defaultMessage: '{value, plural, one {hour} other {hours}}',
   },
-  hoursPlural: {
-    id: 'react-intl-formatted-duration.hoursPlural',
-    defaultMessage: 'hours',
+  minutesUnit: {
+    id: 'react-intl-formatted-duration.minutesUnit',
+    defaultMessage: '{value, plural, one {minute} other {minutes}}',
   },
-  hoursSingular: {
-    id: 'react-intl-formatted-duration.hoursSingular',
-    defaultMessage: 'hour',
-  },
-  minutesPlural: {
-    id: 'react-intl-formatted-duration.minutesPlural',
-    defaultMessage: 'minutes',
-  },
-  minutesSingular: {
-    id: 'react-intl-formatted-duration.minutesSingular',
-    defaultMessage: 'minute',
-  },
-  secondsPlural: {
-    id: 'react-intl-formatted-duration.secondsPlural',
-    defaultMessage: 'seconds',
-  },
-  secondsSingular: {
-    id: 'react-intl-formatted-duration.secondsSingular',
-    defaultMessage: 'second',
+  secondsUnit: {
+    id: 'react-intl-formatted-duration.secondsUnit',
+    defaultMessage: '{value, plural, one {second} other {seconds}}',
   },
 });

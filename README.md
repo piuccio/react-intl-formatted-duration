@@ -144,16 +144,19 @@ export default MyComponent() {
 
 `react-intl-formatted-duration` expects the following keys inside your translation file
 
-* `react-intl-formatted-duration.longFormatting` the default format that generates something like `1 minute 30 seconds`. It uses the values `{minutes}` and `{seconds}`. For example you can change it to `{minutes} and {seconds}`.
+* `react-intl-formatted-duration.longFormatting` the default format that generates something like `1 minute 30 seconds`. It uses the values `{days}`, `{hours}`, `{minutes}` and `{seconds}`. For example you can change it to `{minutes} and {seconds}`.
 * `react-intl-formatted-duration.duration` the format used by the `minutes` and `seconds` variables described above. It uses the values `{value}` and `{unit}`. The default is `{value} {unit}` where `value` is a number and `{unit}` is the textual unit like `minute(s)` or `second(s)`.
 * `react-intl-formatted-duration.timerFormatting` format for `TIMER_FORMAT`, defaults to `{minutes}:{seconds}` where both values are numbers padded to have a minimum length of 2 characters
-* `react-intl-formatted-duration.daysPlural` string for plural days
-* `react-intl-formatted-duration.daysSingular` string for singular days
-* `react-intl-formatted-duration.hoursPlural` string for plural hours
-* `react-intl-formatted-duration.hoursSingular` string for singular hours
-* `react-intl-formatted-duration.minutesPlural` string for plural minutes
-* `react-intl-formatted-duration.minutesSingular` string for singular minutes
-* `react-intl-formatted-duration.secondsPlural` string for plural seconds
-* `react-intl-formatted-duration.secondsSingular` string for singular seconds
+* `react-intl-formatted-duration.daysUnit` string for formatting days, default `{value, plural, one {# day} other {# days}}`
+* `react-intl-formatted-duration.hoursUnit` string for formatting hours, default `{value, plural, one {# hour} other {# hours}}`
+* `react-intl-formatted-duration.minutesUnit` string for formatting minutes, default `{value, plural, one {# minute} other {# minutes}}`
+* `react-intl-formatted-duration.secondsUnit` string for formatting seconds, default `{value, plural, one {# second} other {# seconds}}`
+
+The messages for `daysUnit`, `hoursUnit`, `minutesUnit`, `secondsUnit` use the [format-js syntax](https://formatjs.io/guides/message-syntax/).
 
 If you're using the `extract-intl` script from [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate) you can import `react-intl-formatted-duration/messages` to automatically generate the keys in your translation files.
+
+
+## Upgrading from version 1.0
+
+Version `2.x` allows to use the whole power of format-js message syntax. All you need to do is remove all keys like `daysSingular`, `dayPlural` and simply use `daysUnit` with the format described above.

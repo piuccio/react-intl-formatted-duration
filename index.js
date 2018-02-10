@@ -14,14 +14,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, FormattedPlural, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import messages from './messages';
 
 export const EXTENDED_FORMAT = 'EXTENDED_FORMAT';
 export const TIMER_FORMAT = 'TIMER_FORMAT';
 
-function FormattedUnit({ value, showIfZero, singular, plural, textComponent, valueComponent }) {
+function FormattedUnit({ value, showIfZero, message, textComponent, valueComponent }) {
   if (!value && !showIfZero) {
     return React.createElement(textComponent, {}, '');
   }
@@ -32,11 +32,7 @@ function FormattedUnit({ value, showIfZero, singular, plural, textComponent, val
       values={{
         value: React.createElement(valueComponent, {}, value),
         unit: (
-          <FormattedPlural
-            value={value}
-            one={<FormattedMessage {...singular} />}
-            other={<FormattedMessage {...plural} />}
-          />
+          <FormattedMessage {...message} values={{ value }} />
         ),
       }}
     />
@@ -44,9 +40,11 @@ function FormattedUnit({ value, showIfZero, singular, plural, textComponent, val
 }
 
 FormattedUnit.propTypes = {
-  plural: PropTypes.object,
+  message: PropTypes.shape({
+    id: PropTypes.string,
+    defaultMessage: PropTypes.string,
+  }).isRequired,
   showIfZero: PropTypes.bool,
-  singular: PropTypes.object,
   textComponent: PropTypes.func.isRequired,
   value: PropTypes.number,
   valueComponent: PropTypes.func.isRequired,
@@ -108,8 +106,7 @@ function DurationMessage({ intl, seconds, format, textComponent, valueComponent 
             key: 'days',
             maxLengthIfPadded: 1,
             showIfZero: false,
-            singular: messages.daysSingular,
-            plural: messages.daysPlural,
+            message: messages.daysUnit,
             textComponent,
             valueComponent: valueComponent || textComponent,
           },
@@ -121,8 +118,7 @@ function DurationMessage({ intl, seconds, format, textComponent, valueComponent 
             key: 'hours',
             maxLengthIfPadded: 1,
             showIfZero: false,
-            singular: messages.hoursSingular,
-            plural: messages.hoursPlural,
+            message: messages.hoursUnit,
             textComponent,
             valueComponent: valueComponent || textComponent,
           },
@@ -134,8 +130,7 @@ function DurationMessage({ intl, seconds, format, textComponent, valueComponent 
             key: 'minutes',
             maxLengthIfPadded: 1,
             showIfZero: !hasSeconds && fullHours === 0,
-            singular: messages.minutesSingular,
-            plural: messages.minutesPlural,
+            message: messages.minutesUnit,
             textComponent,
             valueComponent: valueComponent || textComponent,
           },
@@ -147,8 +142,7 @@ function DurationMessage({ intl, seconds, format, textComponent, valueComponent 
             key: 'seconds',
             maxLengthIfPadded: 2,
             showIfZero: false,
-            singular: messages.secondsSingular,
-            plural: messages.secondsPlural,
+            message: messages.secondsUnit,
             textComponent,
             valueComponent: valueComponent || textComponent,
           },
