@@ -81,7 +81,7 @@ export function formatDurationToParts(intl, seconds, { format } = {}) {
   const showFullMinutes = !hasHours && !hasDays;
   const showFullHours = !hasDays;
 
-  const tokenizedMessage = formatTokenizedMessage(intl, formattingMessage, {
+  let tokenizedMessage = formatTokenizedMessage(intl, formattingMessage, {
     days: hasDays ? valueFormatter({
       intl,
       value: fullDays,
@@ -141,7 +141,35 @@ export function formatDurationToParts(intl, seconds, { format } = {}) {
       }
     }
 
-    return flatTokenizedMessage;
+    tokenizedMessage = flatTokenizedMessage;
+  }
+
+  // Remove trailing spaces (start)
+  while (tokenizedMessage.length > 0 && tokenizedMessage[0].value.trim() === '') {
+    tokenizedMessage.shift();
+  }
+
+  // Remove trailing spaces (end)
+  while (tokenizedMessage.length > 0 && tokenizedMessage[tokenizedMessage.length - 1].value.trim() === '') {
+    tokenizedMessage.pop();
+  }
+
+  // Concat consecutive literals & reduce spaces to 1
+  for (let i = 0; i < (tokenizedMessage.length - 1); i++) {
+    const token = tokenizedMessage[i];
+    if (token.type !== KEY_LITERAL) {
+      continue;
+    }
+
+    const nextToken = tokenizedMessage[i + 1];
+    if (nextToken.type !== KEY_LITERAL) {
+      i++; // skip next token too
+      continue;
+    }
+
+    token.value = (token.value + nextToken.value).replace(/\s\s+/g, ' ');
+    tokenizedMessage.splice(i + 1, 1);
+    i--; // stay on current token.
   }
 
   return tokenizedMessage;
