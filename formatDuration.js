@@ -88,8 +88,7 @@ export function formatDurationToParts(intl, seconds, { format } = {}) {
       key: 'days',
       maxLengthIfPadded: 1,
       showIfZero: false,
-      singular: messages.daysSingular,
-      plural: messages.daysPlural,
+      message: messages.daysUnit,
     }) : undefined,
     hours: hasHours ? valueFormatter({
       intl,
@@ -97,8 +96,7 @@ export function formatDurationToParts(intl, seconds, { format } = {}) {
       key: 'hours',
       maxLengthIfPadded: 1,
       showIfZero: false,
-      singular: messages.hoursSingular,
-      plural: messages.hoursPlural,
+      message: messages.hoursUnit,
     }) : undefined,
     minutes: valueFormatter({
       intl,
@@ -106,8 +104,7 @@ export function formatDurationToParts(intl, seconds, { format } = {}) {
       key: 'minutes',
       maxLengthIfPadded: 1,
       showIfZero: !hasSeconds && fullHours === 0,
-      singular: messages.minutesSingular,
-      plural: messages.minutesPlural,
+      message: messages.minutesUnit,
     }),
     seconds: hasSeconds ? valueFormatter({
       intl,
@@ -115,8 +112,7 @@ export function formatDurationToParts(intl, seconds, { format } = {}) {
       key: 'seconds',
       maxLengthIfPadded: 2,
       showIfZero: false,
-      singular: messages.secondsSingular,
-      plural: messages.secondsPlural,
+      message: messages.secondsUnit,
     }) : undefined,
   });
 
@@ -151,16 +147,14 @@ export function formatDurationToParts(intl, seconds, { format } = {}) {
   return tokenizedMessage;
 }
 
-function formatUnit({ intl, value, showIfZero, singular, plural }) {
+function formatUnit({ intl, value, showIfZero, message }) {
   if (!value && !showIfZero) {
     return [];
   }
 
   value = String(value);
 
-  const unit = intl.formatPlural(value) === 'one' ?
-    intl.formatMessage(singular):
-    intl.formatMessage(plural);
+  const unit = intl.formatMessage(message, { value });
 
   return formatTokenizedMessage(intl, messages.duration, { value, unit });
 }
