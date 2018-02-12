@@ -7,7 +7,6 @@ class DurationMessage extends React.Component {
 
   render() {
     const intl = this.props.intl;
-    const children = this.props.children;
 
     const {
       seconds,
@@ -16,10 +15,6 @@ class DurationMessage extends React.Component {
     } = this.props;
 
     const durationParts = formatDurationToParts(intl, seconds, this.props);
-
-    if (typeof children === 'function') {
-      return children(durationParts);
-    }
 
     return (
       <Text>
@@ -61,7 +56,6 @@ DurationMessage.propTypes = {
   seconds: PropTypes.number.isRequired,
   textComponent: PropTypes.func.isRequired,
   valueComponent: PropTypes.func,
-  children: PropTypes.func,
 };
 
 export default injectIntl(DurationMessage);
