@@ -1,6 +1,6 @@
 import { getIntl, text } from './helpers';
 import { setLocale, loadTranslation } from 'enzyme-react-intl';
-import { formatDuration, formatDurationToParts, KEY_LITERAL } from '../index';
+import { formatDuration, formatDurationToParts } from '../index';
 
 describe('Optional format', () => {
   it('formats duration using hours (react)', () => {
@@ -57,7 +57,7 @@ describe('Optional format', () => {
     expect(formatDurationToParts(intl, 61, { format })).toEqual([
       { type: 'minutes', value: '1' },
       { type: 'unit', value: '分' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '1' },
       { type: 'unit', value: '秒' },
     ]);
@@ -70,7 +70,7 @@ describe('Optional format', () => {
     expect(formatDurationToParts(intl, 3601, { format })).toEqual([
       { type: 'hours', value: '1' },
       { type: 'unit', value: '時' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '1' },
       { type: 'unit', value: '秒' },
     ]);
@@ -78,7 +78,7 @@ describe('Optional format', () => {
     expect(formatDurationToParts(intl, 3602, { format })).toEqual([
       { type: 'hours', value: '1' },
       { type: 'unit', value: '時' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '2' },
       { type: 'unit', value: '秒' },
     ]);
@@ -86,7 +86,7 @@ describe('Optional format', () => {
     expect(formatDurationToParts(intl, 3660, { format })).toEqual([
       { type: 'hours', value: '1' },
       { type: 'unit', value: '時' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'minutes', value: '1' },
       { type: 'unit', value: '分' },
     ]);
@@ -94,10 +94,10 @@ describe('Optional format', () => {
     expect(formatDurationToParts(intl, 3661, { format })).toEqual([
       { type: 'hours', value: '1' },
       { type: 'unit', value: '時' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'minutes', value: '1' },
       { type: 'unit', value: '分' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '1' },
       { type: 'unit', value: '秒' },
     ]);
@@ -105,10 +105,10 @@ describe('Optional format', () => {
     expect(formatDurationToParts(intl, 7322, { format })).toEqual([
       { type: 'hours', value: '2' },
       { type: 'unit', value: '時' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'minutes', value: '2' },
       { type: 'unit', value: '分' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '2' },
       { type: 'unit', value: '秒' },
     ]);
@@ -116,7 +116,7 @@ describe('Optional format', () => {
     expect(formatDurationToParts(intl, 90000, { format })).toEqual([
       { type: 'days', value: '1' },
       { type: 'unit', value: '日' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'hours', value: '1' },
       { type: 'unit', value: '時' },
     ]);

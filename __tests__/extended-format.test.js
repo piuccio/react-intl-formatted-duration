@@ -1,5 +1,5 @@
 import { getIntl, text } from './helpers';
-import { formatDuration, formatDurationToParts, KEY_LITERAL } from '../index';
+import { formatDuration, formatDurationToParts } from '../index';
 
 describe('Extended format', () => {
   it('formats duration in English with long format (react)', () => {
@@ -33,71 +33,71 @@ describe('Extended format', () => {
 
     expect(formatDurationToParts(intl, 1)).toEqual([
       { type: 'seconds', value: '1' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'second' },
     ]);
 
     expect(formatDurationToParts(intl, 30)).toEqual([
       { type: 'seconds', value: '30' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'seconds' },
     ]);
 
     expect(formatDurationToParts(intl, 59)).toEqual([
       { type: 'seconds', value: '59' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'seconds' },
     ]);
 
     expect(formatDurationToParts(intl, 60)).toEqual([
       { type: 'minutes', value: '1' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'minute' },
     ]);
 
     expect(formatDurationToParts(intl, 61)).toEqual([
       { type: 'minutes', value: '1' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'minute' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '1' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'second' },
     ]);
 
     expect(formatDurationToParts(intl, 62)).toEqual([
       { type: 'minutes', value: '1' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'minute' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '2' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'seconds' },
     ]);
 
     expect(formatDurationToParts(intl, 120)).toEqual([
       { type: 'minutes', value: '2' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'minutes' },
     ]);
 
     expect(formatDurationToParts(intl, 121)).toEqual([
       { type: 'minutes', value: '2' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'minutes' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '1' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'second' },
     ]);
 
     expect(formatDurationToParts(intl, 150)).toEqual([
       { type: 'minutes', value: '2' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'minutes' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'seconds', value: '30' },
-      { type: KEY_LITERAL, value: ' ' },
+      { type: 'literal', value: ' ' },
       { type: 'unit', value: 'seconds' },
     ]);
   });
