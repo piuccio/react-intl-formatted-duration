@@ -135,10 +135,39 @@ export default MyComponent() {
 import FormattedDuration, { TIMER_FORMAT } from 'react-intl-formatted-duration';
 
 export default MyComponent() {
-  return <FormattedDuration seconds={60} textComponent={Text} format={TIMER_FORMAT} />
+  return <FormattedDuration seconds={60} textComponent={Text} format={TIMER_FORMAT} />;
   // will render `1:00`
 }
 ```
+
+### Without components
+
+`react-intl-formatted-duration` exports two methods `formatDuration` and `formatDurationToParts` if you need to use the string directly without using a react component.
+It accepts the same arguments as `FormattedDuration` except for `textComponent` and `valueComponent`.
+The first argument of those two functions is an `intl` instance from react-intl. The second argument is the duration in seconds. The third argument is any other argument as an option object.
+
+`formatDuration` works exactly like FormattedDuration but returns the formatted duration as a string.
+
+```js
+import { formatDuration, TIMER_FORMAT } from 'react-intl-formatted-duration';
+
+const formatted = formatDuration(intl, /* seconds = */ 60, { format: TIMER_FORMAT });
+// returns '1:00'
+```
+
+`formatDurationToParts` works like `formatDurationToParts` but returns the formatted duration as an array of tokens. Similar to what [DateTimeFormat#formatToParts](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat/formatToParts) produces
+
+```js
+import { formatDuration, TIMER_FORMAT } from 'react-intl-formatted-duration';
+
+const formatted = formatDuration(intl, /* seconds = */ 60, { format: TIMER_FORMAT });
+// returns [
+//   { type: 'minutes', value: '1' },
+//   { type: 'literal', value: ':' },
+//   { type: 'seconds', value: '00' },
+// ]
+```
+
 
 ## Localization
 
