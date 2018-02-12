@@ -24,16 +24,16 @@ export function formatDuration(intl, seconds, { format } = {}) {
  *
  * @example formatDurationToParts(intl, 150, { format: 'EXTENDED_FORMAT' })
  * [ { type: 'minutes', value: '2' },
- *   { type: Symbol(literal), value: ' ' },
+ *   { type: 'literal', value: ' ' },
  *   { type: 'unit', value: 'minutes' },
- *   { type: Symbol(literal), value: ' ' },
+ *   { type: 'literal', value: ' ' },
  *   { type: 'seconds', value: '30' },
- *   { type: Symbol(literal), value: ' ' },
+ *   { type: 'literal', value: ' ' },
  *   { type: 'unit', value: 'seconds' } ]
  *
  * @example formatDurationToParts(intl, 62, { format: 'TIMER_FORMAT' })
  * [ { type: 'minutes', value: '1' },
- *   { type: Symbol(literal), value: ':' },
+ *   { type: 'literal', value: ':' },
  *   { type: 'seconds', value: '02' } ]
  *
  * @param intl      - React Intl intl instance
