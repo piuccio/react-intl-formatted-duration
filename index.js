@@ -13,4 +13,4 @@
 */
 
 export { default as DurationMessage, default } from './DurationMessage';
-export { default as formatDuration, KEY_LITERAL, EXTENDED_FORMAT, TIMER_FORMAT } from './formatDuration';
+export { formatDuration, formatDurationToParts, KEY_LITERAL, EXTENDED_FORMAT, TIMER_FORMAT } from './formatDuration';
