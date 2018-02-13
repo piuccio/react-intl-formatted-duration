@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { intlShape, FormattedNumber, injectIntl } from 'react-intl';
-import { formatDurationToParts, KEY_LITERAL, KEY_UNIT } from './formatDuration';
+import { formatDurationToParts } from './formatDuration';
 
 class DurationMessage extends React.Component {
 
@@ -24,8 +24,8 @@ class DurationMessage extends React.Component {
           }
 
           switch (type) {
-            case KEY_UNIT:
-            case KEY_LITERAL:
+            case 'unit':
+            case 'literal':
               return <Text key={i}>{value}</Text>;
 
             default:
