@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component generates a stable dom 1`] = `"<x-text><x-value>1</x-value> <x-text>minute</x-text> <x-value>1</x-value> <x-text>second</x-text></x-text>"`;
