@@ -17,9 +17,10 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import messages from './messages';
-
-export const EXTENDED_FORMAT = 'EXTENDED_FORMAT';
-export const TIMER_FORMAT = 'TIMER_FORMAT';
+import {
+  EXTENDED_FORMAT,
+  TIMER_FORMAT
+} from './src/constants';
 
 function FormattedUnit({ value, showIfZero, message, textComponent, valueComponent }) {
   if (!value && !showIfZero) {
@@ -161,3 +162,9 @@ DurationMessage.propTypes = {
 };
 
 export default injectIntl(DurationMessage);
+export { formatToParts } from './src/parts';
+
+export {
+  EXTENDED_FORMAT,
+  TIMER_FORMAT
+};
