@@ -156,8 +156,8 @@ DurationMessage.propTypes = {
   intl: intlShape.isRequired,
   format: PropTypes.string,
   seconds: PropTypes.number.isRequired,
-  textComponent: PropTypes.func.isRequired,
-  valueComponent: PropTypes.func,
+  textComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
+  valueComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 export default injectIntl(DurationMessage);
