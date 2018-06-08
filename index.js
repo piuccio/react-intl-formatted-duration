@@ -45,9 +45,9 @@ FormattedUnit.propTypes = {
     defaultMessage: PropTypes.string,
   }).isRequired,
   showIfZero: PropTypes.bool,
-  textComponent: PropTypes.func.isRequired,
+  textComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
   value: PropTypes.number,
-  valueComponent: PropTypes.func.isRequired,
+  valueComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
 };
 
 function PaddedValue({ value, maxLengthIfPadded, valueComponent }) {
@@ -57,7 +57,7 @@ function PaddedValue({ value, maxLengthIfPadded, valueComponent }) {
 PaddedValue.propTypes = {
   value: PropTypes.number,
   maxLengthIfPadded: PropTypes.number,
-  valueComponent: PropTypes.func.isRequired,
+  valueComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
 };
 
 function DurationMessage({ intl, seconds, format, textComponent, valueComponent }) {
