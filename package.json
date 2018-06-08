@@ -1,6 +1,6 @@
 {
   "name": "react-intl-formatted-duration",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "React intl component to express time duration",
   "keywords": [
     "duration",
