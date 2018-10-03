@@ -1,3 +1,4 @@
+// @flow
 /**
 * Unfortunately ReactIntl doesn't support duration yet because it's not implemented
 * in the ECMA specs: https://github.com/yahoo/react-intl/issues/77

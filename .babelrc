@@ -1,13 +1,13 @@
 {
   "presets": [
-    ["env", {
+    ["@babel/env", {
       "modules": false
     }],
-    "react"
+    "@babel/react"
   ],
   "env": {
     "test": {
-      "presets": ["env", "react"]
+      "presets": ["@babel/env", "@babel/react"]
     }
   }
 }

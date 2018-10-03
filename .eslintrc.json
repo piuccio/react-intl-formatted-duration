@@ -1,7 +1,9 @@
 {
+  "parser": "babel-eslint",
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
   ],
   "env": {
     "es6": true
@@ -14,7 +16,8 @@
     }
   },
   "plugins": [
-    "react"
+    "react",
+    "flowtype"
   ],
   "rules": {
     "comma-dangle": ["error", {
@@ -22,5 +25,10 @@
         "objects": "always-multiline",
         "functions": "always-multiline"
     }]
+  },
+  "settings": {
+    "react": {
+      "version": "16.0"
+    }
   }
 }
