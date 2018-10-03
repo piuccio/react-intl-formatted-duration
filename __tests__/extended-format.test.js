@@ -1,7 +1,8 @@
+// @flow
 import { text } from './helpers';
 
 describe('Extended format', () => {
-  it('formats duration in English with long format', () => {
+  it('formats duration in English with long format (react)', () => {
     expect(text(1)).toEqual('1 second');
     expect(text(30)).toEqual('30 seconds');
     expect(text(59)).toEqual('59 seconds');

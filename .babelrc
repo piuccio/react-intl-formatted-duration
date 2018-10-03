@@ -3,11 +3,12 @@
     ["@babel/env", {
       "modules": false
     }],
-    "@babel/react"
+    "@babel/react",
+    "@babel/flow"
   ],
   "env": {
     "test": {
-      "presets": ["@babel/env", "@babel/react"]
+      "presets": ["@babel/env", "@babel/react", "@babel/flow"]
     }
   }
 }

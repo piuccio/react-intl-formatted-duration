@@ -1,3 +1,4 @@
+// @flow
 import { text } from './helpers';
 
 describe('Optional format', () => {
