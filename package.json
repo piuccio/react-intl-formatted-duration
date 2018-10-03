@@ -25,7 +25,7 @@
     "flow": "flow",
     "compile": "rollup -c rollup.config.js",
     "codecov": "codecov",
-    "lint": "eslint index.js",
+    "lint": "eslint index.js src",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll",

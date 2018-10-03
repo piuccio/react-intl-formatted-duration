@@ -1,3 +1,4 @@
+// @flow
 import { text } from './helpers';
 import { setLocale, loadTranslation } from 'enzyme-react-intl';
 

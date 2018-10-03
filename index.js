@@ -19,8 +19,15 @@ import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import messages from './messages';
 
-export const EXTENDED_FORMAT = 'EXTENDED_FORMAT';
-export const TIMER_FORMAT = 'TIMER_FORMAT';
+import {
+  EXTENDED_FORMAT,
+  TIMER_FORMAT
+} from './src/constants';
+
+export {
+  EXTENDED_FORMAT,
+  TIMER_FORMAT
+};
 
 function FormattedUnit({ value, showIfZero, message, textComponent, valueComponent }) {
   if (!value && !showIfZero) {

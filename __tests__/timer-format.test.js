@@ -1,3 +1,4 @@
+// @flow
 import { text } from './helpers';
 
 import { TIMER_FORMAT } from '../index';
