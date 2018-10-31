@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { mountWithIntl } from 'enzyme-react-intl';
 
