@@ -1,7 +1,8 @@
 {
   "presets": [
     ["@babel/env", {
-      "modules": false
+      "modules": false,
+      "targets": "last 2 versions, ie 11"
     }],
     "@babel/react",
     "@babel/flow"

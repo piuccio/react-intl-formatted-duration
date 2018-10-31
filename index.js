@@ -14,158 +14,49 @@
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl } from 'react-intl';
+import DurationUnitFormat from 'intl-unofficial-duration-unit-format';
+import type { intlShape } from 'react-intl';
+import type { ElementType } from 'react';
 
-import messages from './messages';
+export const EXTENDED_FORMAT = 'EXTENDED_FORMAT';
+export const TIMER_FORMAT = 'TIMER_FORMAT';
 
-import {
-  EXTENDED_FORMAT,
-  TIMER_FORMAT
-} from './src/constants';
-
-export {
-  EXTENDED_FORMAT,
-  TIMER_FORMAT
-};
-
-function FormattedUnit({ value, showIfZero, message, textComponent, valueComponent }) {
-  if (!value && !showIfZero) {
-    return React.createElement(textComponent, {}, '');
+function DurationMessage({ intl, seconds, format, textComponent, valueComponent, ...otherProps }: Props) {
+  let actualFormat = intl.messages[`react-intl-formatted-duration/custom-format/${format || ''}`] || format;
+  if (!format || format === EXTENDED_FORMAT) {
+    actualFormat = intl.messages['react-intl-formatted-duration.longFormatting'] || '{minutes} {seconds}';
   }
-
-  return (
-    <FormattedMessage
-      {...messages.duration}
-      values={{
-        value: React.createElement(valueComponent, {}, value),
-        unit: (
-          <FormattedMessage {...message} values={{ value }} />
-        ),
-      }}
-    />
-  );
-}
-
-FormattedUnit.propTypes = {
-  message: PropTypes.shape({
-    id: PropTypes.string,
-    defaultMessage: PropTypes.string,
-  }).isRequired,
-  showIfZero: PropTypes.bool,
-  textComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
-  value: PropTypes.number,
-  valueComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
-};
-
-function PaddedValue({ value, maxLengthIfPadded, valueComponent }) {
-  return React.createElement(valueComponent, {}, `0${value || '0'}`.substr(-maxLengthIfPadded));
-}
-
-PaddedValue.propTypes = {
-  value: PropTypes.number,
-  maxLengthIfPadded: PropTypes.number,
-  valueComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
-};
-
-function DurationMessage({ intl, seconds, format, textComponent, valueComponent }) {
-  const fullDays = Math.floor(seconds / 86400);
-  const fullHours = Math.floor(seconds / 3600);
-  const hoursLeft = Math.floor(fullHours % 24);
-  const fullMinutes = Math.floor(seconds / 60);
-  const minutesLeft = Math.floor(fullMinutes % 60);
-  const secondsLeft = seconds % 60;
-
-  let component;
-  let formattingMessage;
-  switch (format) {
-    case TIMER_FORMAT:
-      component = PaddedValue;
-      formattingMessage = messages.timerFormatting;
-      break;
-    case EXTENDED_FORMAT:
-      component = FormattedUnit;
-      formattingMessage = messages.longFormatting;
-      break;
-    default:
-      component = FormattedUnit;
-      formattingMessage = format ? {
-        id: `react-intl-formatted-duration/custom-format/${format}`,
-        defaultMessage: format,
-      } : messages.longFormatting;
-      break;
+  if (format === TIMER_FORMAT) {
+    actualFormat = intl.messages['react-intl-formatted-duration.timerFormatting'] || '{minutes}:{seconds}';
   }
+  const parts = new DurationUnitFormat(intl.locale, {
+    format: actualFormat,
+    formatUnits: {
+      [DurationUnitFormat.units.DAY]: intl.messages['react-intl-formatted-duration.daysUnit'] || '{value, plural, one {day} other {days}}',
+      [DurationUnitFormat.units.HOUR]: intl.messages['react-intl-formatted-duration.hoursUnit'] || '{value, plural, one {hour} other {hours}}',
+      [DurationUnitFormat.units.MINUTE]: intl.messages['react-intl-formatted-duration.minutesUnit'] || '{value, plural, one {minute} other {minutes}}',
+      [DurationUnitFormat.units.SECOND]: intl.messages['react-intl-formatted-duration.secondsUnit'] || '{value, plural, one {second} other {seconds}}',
+    },
+    formatDuration: intl.messages['react-intl-formatted-duration.duration'] || '{value} {unit}',
+    round: true, // TODO backward compatible, add a prop to configure it
+    style: format === TIMER_FORMAT ? DurationUnitFormat.styles.TIMER : DurationUnitFormat.styles.CUSTOM,
+  }).formatToParts(seconds);
 
-  const message = intl.messages[formattingMessage.id] || formattingMessage.defaultMessage;
-  const hasSeconds = message.indexOf('{seconds}') !== -1;
-  const hasHours = message.indexOf('{hours}') !== -1;
-  const hasDays = message.indexOf('{days}') !== -1;
-  const showFullMinutes = !hasHours && !hasDays;
-  const showFullHours = !hasDays;
-
-  return (
-    <FormattedMessage
-      {...formattingMessage}
-      values={{
-        days: hasDays ? React.createElement(
-          component,
-          {
-            value: fullDays,
-            key: 'days',
-            maxLengthIfPadded: 1,
-            showIfZero: false,
-            message: messages.daysUnit,
-            textComponent,
-            valueComponent: valueComponent || textComponent,
-          },
-        ) : undefined,
-        hours: hasHours ? React.createElement(
-          component,
-          {
-            value: showFullHours ? fullHours : hoursLeft,
-            key: 'hours',
-            maxLengthIfPadded: 1,
-            showIfZero: false,
-            message: messages.hoursUnit,
-            textComponent,
-            valueComponent: valueComponent || textComponent,
-          },
-        ) : undefined,
-        minutes: React.createElement(
-          component,
-          {
-            value: (showFullMinutes ? fullMinutes : minutesLeft) + ((!hasSeconds && secondsLeft >= 30) ? 1 : 0),
-            key: 'minutes',
-            maxLengthIfPadded: 1,
-            showIfZero: !hasSeconds && fullHours === 0,
-            message: messages.minutesUnit,
-            textComponent,
-            valueComponent: valueComponent || textComponent,
-          },
-        ),
-        seconds: hasSeconds ? React.createElement(
-          component,
-          {
-            value: secondsLeft,
-            key: 'seconds',
-            maxLengthIfPadded: 2,
-            showIfZero: false,
-            message: messages.secondsUnit,
-            textComponent,
-            valueComponent: valueComponent || textComponent,
-          },
-        ) : undefined,
-      }}
-    />
-  );
+  const Text = textComponent || intl.textComponent;
+  const Value = valueComponent || textComponent || intl.textComponent;
+  return React.createElement(Text, otherProps, parts.map((token) => {
+    if (token.type === 'literal' || token.type === 'unit') return token.value;
+    return React.createElement(Value, { key: token.type }, token.value);
+  }));
 }
 
-DurationMessage.propTypes = {
-  intl: intlShape.isRequired,
-  format: PropTypes.string,
-  seconds: PropTypes.number.isRequired,
-  textComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
-  valueComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-};
+type Props = {
+  intl: intlShape,
+  format?: string,
+  seconds: number,
+  textComponent?: ElementType,
+  valueComponent?: ElementType,
+}
 
 export default injectIntl(DurationMessage);
