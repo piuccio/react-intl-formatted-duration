@@ -160,3 +160,7 @@ If you're using the `extract-intl` script from [react-boilerplate](https://githu
 ## Upgrading from version 1.0
 
 Version `2.x` allows to use the whole power of format-js message syntax. All you need to do is remove all keys like `daysSingular`, `dayPlural` and simply use `daysUnit` with the format described above.
+
+## Upgrading from version 2.0
+
+Version `3.x` has exactly the same API as version `2.x` but is a complete rewrite. You don't need to change your code.
