@@ -147,10 +147,10 @@ export default MyComponent() {
 * `react-intl-formatted-duration.longFormatting` the default format that generates something like `1 minute 30 seconds`. It uses the values `{days}`, `{hours}`, `{minutes}` and `{seconds}`. For example you can change it to `{minutes} and {seconds}`.
 * `react-intl-formatted-duration.duration` the format used by the `minutes` and `seconds` variables described above. It uses the values `{value}` and `{unit}`. The default is `{value} {unit}` where `value` is a number and `{unit}` is the textual unit like `minute(s)` or `second(s)`.
 * `react-intl-formatted-duration.timerFormatting` format for `TIMER_FORMAT`, defaults to `{minutes}:{seconds}` where both values are numbers padded to have a minimum length of 2 characters
-* `react-intl-formatted-duration.daysUnit` string for formatting days, default `{value, plural, one {# day} other {# days}}`
-* `react-intl-formatted-duration.hoursUnit` string for formatting hours, default `{value, plural, one {# hour} other {# hours}}`
-* `react-intl-formatted-duration.minutesUnit` string for formatting minutes, default `{value, plural, one {# minute} other {# minutes}}`
-* `react-intl-formatted-duration.secondsUnit` string for formatting seconds, default `{value, plural, one {# second} other {# seconds}}`
+* `react-intl-formatted-duration.daysUnit` string for formatting days, default `{value, plural, one {day} other {days}}`
+* `react-intl-formatted-duration.hoursUnit` string for formatting hours, default `{value, plural, one {hour} other {hours}}`
+* `react-intl-formatted-duration.minutesUnit` string for formatting minutes, default `{value, plural, one {minute} other {minutes}}`
+* `react-intl-formatted-duration.secondsUnit` string for formatting seconds, default `{value, plural, one {second} other {seconds}}`
 
 The messages for `daysUnit`, `hoursUnit`, `minutesUnit`, `secondsUnit` use the [format-js syntax](https://formatjs.io/guides/message-syntax/).
 
