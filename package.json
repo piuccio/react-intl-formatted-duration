@@ -48,7 +48,6 @@
     "eslint-plugin-flowtype": "^3.1.4",
     "eslint-plugin-react": "^7.11.1",
     "flow-bin": "^0.85.0",
-    "intl-unofficial-duration-unit-format": "1.0.0",
     "jest": "^23.6.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
@@ -75,5 +74,8 @@
     "transform": {
       ".*": "<rootDir>/node_modules/babel-jest"
     }
+  },
+  "dependencies": {
+    "intl-unofficial-duration-unit-format": "1.0.0"
   }
 }
