@@ -4,12 +4,11 @@
       "modules": false,
       "targets": "last 2 versions, ie 11"
     }],
-    "@babel/react",
-    "@babel/flow"
+    "@babel/react"
   ],
   "env": {
     "test": {
-      "presets": ["@babel/env", "@babel/react", "@babel/flow"]
+      "presets": ["@babel/env", "@babel/react"]
     }
   }
 }

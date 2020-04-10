@@ -1,4 +1,3 @@
-// @flow
 /**
 * Unfortunately ReactIntl doesn't support duration yet because it's not implemented
 * in the ECMA specs: https://github.com/yahoo/react-intl/issues/77
@@ -16,13 +15,11 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import DurationUnitFormat from 'intl-unofficial-duration-unit-format';
-import type { intlShape } from 'react-intl';
-import type { ElementType } from 'react';
 
 export const EXTENDED_FORMAT = 'EXTENDED_FORMAT';
 export const TIMER_FORMAT = 'TIMER_FORMAT';
 
-function DurationMessage({ intl, seconds, format, textComponent, valueComponent, ...otherProps }: Props) {
+function DurationMessage({ intl, seconds, format, textComponent, valueComponent, ...otherProps }) {
   let actualFormat = intl.messages[`react-intl-formatted-duration/custom-format/${format || ''}`] || format;
   if (!format || format === EXTENDED_FORMAT) {
     actualFormat = intl.messages['react-intl-formatted-duration.longFormatting'] || '{minutes} {seconds}';
@@ -49,14 +46,6 @@ function DurationMessage({ intl, seconds, format, textComponent, valueComponent,
     if (token.type === 'literal' || token.type === 'unit') return token.value;
     return React.createElement(Value, { key: token.type }, token.value);
   }));
-}
-
-type Props = {
-  intl: intlShape,
-  format?: string,
-  seconds: number,
-  textComponent?: ElementType,
-  valueComponent?: ElementType,
 }
 
 export default injectIntl(DurationMessage);
