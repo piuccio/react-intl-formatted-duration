@@ -1,10 +1,8 @@
-import { text } from './helpers';
-import { setLocale, loadTranslation } from 'enzyme-react-intl';
+import {setLocale, text} from './helpers';
 
 describe('Optional format', () => {
   it('formats duration using hours', () => {
     setLocale('ja');
-    loadTranslation('__tests__/helpers/ja.json');
 
     const format = 'ja-full-test-format';
     expect(text(1, format)).toEqual('1秒');

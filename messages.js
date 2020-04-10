@@ -1,4 +1,3 @@
-// @flow
 /*
  * DurationMessage Messages
  *
