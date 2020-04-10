@@ -25,6 +25,7 @@
     "compile": "rollup -c rollup.config.js",
     "codecov": "codecov",
     "lint": "eslint index.js __tests__",
+    "storybook": "start-storybook",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll",
@@ -35,6 +36,8 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
+    "@storybook/addons": "5.3.18",
+    "@storybook/react": "5.3.18",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.3.0",
@@ -52,7 +55,8 @@
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-filesize": "7.0.0",
-    "rollup-plugin-node-resolve": "5.2.0"
+    "rollup-plugin-node-resolve": "5.2.0",
+    "storybook-addon-intl": "2.4.1"
   },
   "peerDependencies": {
     "react": ">= 16.0",
