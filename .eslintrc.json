@@ -23,6 +23,7 @@
         "objects": "always-multiline",
         "functions": "always-multiline"
     }],
+    "react/display-name": 0,
     "react/prop-types": 0
   },
   "settings": {
