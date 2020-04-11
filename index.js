@@ -19,13 +19,17 @@ import DurationUnitFormat from 'intl-unofficial-duration-unit-format';
 export const EXTENDED_FORMAT = 'EXTENDED_FORMAT';
 export const TIMER_FORMAT = 'TIMER_FORMAT';
 
-function DurationMessage({ intl, seconds, format, textComponent, valueComponent, ...otherProps }) {
+function DurationMessage({ intl, seconds, format, textComponent, unitDisplay, valueComponent, ...otherProps }) {
   let actualFormat = intl.messages[`react-intl-formatted-duration/custom-format/${format || ''}`] || format;
   if (!format || format === EXTENDED_FORMAT) {
     actualFormat = intl.messages['react-intl-formatted-duration.longFormatting'] || '{minutes} {seconds}';
   }
   if (format === TIMER_FORMAT) {
     actualFormat = intl.messages['react-intl-formatted-duration.timerFormatting'] || '{minutes}:{seconds}';
+  }
+  let actualSytle = unitDisplay;
+  if (!actualSytle) {
+    actualSytle = format === TIMER_FORMAT ? DurationUnitFormat.styles.TIMER : DurationUnitFormat.styles.CUSTOM;
   }
   const parts = new DurationUnitFormat(intl.locale, {
     format: actualFormat,
@@ -37,7 +41,7 @@ function DurationMessage({ intl, seconds, format, textComponent, valueComponent,
     },
     formatDuration: intl.messages['react-intl-formatted-duration.duration'] || '{value} {unit}',
     round: true, // TODO backward compatible, add a prop to configure it
-    style: format === TIMER_FORMAT ? DurationUnitFormat.styles.TIMER : DurationUnitFormat.styles.CUSTOM,
+    style: actualSytle,
   }).formatToParts(seconds);
 
   const Text = textComponent || intl.textComponent;

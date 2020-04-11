@@ -37,10 +37,12 @@ function Text(props) {
 }
 
 export function text(value, format) {
+  const unitDisplay = ['long', 'short', 'narrow'].includes(format) ? format : undefined;
   return mountWithIntl((
     <DurationMessage
       seconds={value}
-      format={format}
+      format={unitDisplay ? undefined : format}
+      unitDisplay={unitDisplay}
       textComponent={Text}
     />
   )).text().trim().replace(/\s+/g, ' ');

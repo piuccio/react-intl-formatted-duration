@@ -17,18 +17,15 @@ This component provides a very simple abstraction that works on React (DOM), Rea
 import React from 'react';
 import FormattedDuration from 'react-intl-formatted-duration';
 
-import styled from 'styled-components';
-const Text = styled.span``;
-
 export default MyComponent() {
-  return <FormattedDuration seconds={60} textComponent={Text} />
+  return <FormattedDuration seconds={60} />
   // will render `1 minute`
 }
 ```
 
 The default format only shows minutes and seconds. For more complex needs check the [custom format section](#Custom_format).
 
-It's not necessary to use styled components, you can use any component you like available on your target environment
+By default the output text is wrapped in a `span`, you can specify any component you like available on your target environment:
 
 ```js
 // Using React Native
@@ -36,6 +33,20 @@ import React from 'react';
 import FormattedDuration from 'react-intl-formatted-duration';
 
 import { Text } from 'react-native';
+
+export default MyComponent() {
+  return <FormattedDuration seconds={60} textComponent={Text} />
+  // will render `1 minute`
+}
+```
+
+```js
+// Using styled components
+import React from 'react';
+import FormattedDuration from 'react-intl-formatted-duration';
+
+import styled from 'styled-components';
+const Text = styled.span``;
 
 export default MyComponent() {
   return <FormattedDuration seconds={60} textComponent={Text} />
@@ -86,13 +97,13 @@ export default MyComponent() {
 By default the component only renders minutes and seconds, if you want to display hours or days you can use a custom format:
 
 ```js
-<FormattedDuration seconds={180000} textComponent={Text} format="{days} {hours} {minutes} {seconds}" />
+<FormattedDuration seconds={180000} format="{days} {hours} {minutes} {seconds}" />
 // will render `2 days 2 hours`
 
-<FormattedDuration seconds={180000} textComponent={Text} format="{hours} {minutes} {seconds}" />
+<FormattedDuration seconds={180000} format="{hours} {minutes} {seconds}" />
 // will render `50 hours`
 
-<FormattedDuration seconds={180000} textComponent={Text} format="{minutes} {seconds}" />
+<FormattedDuration seconds={180000} format="{minutes} {seconds}" />
 // will render `3000 minutes`
 }
 ```
@@ -100,13 +111,13 @@ By default the component only renders minutes and seconds, if you want to displa
 Seconds is also optional and if missing, minutes will be rounded to the closed value
 
 ```js
-<FormattedDuration seconds={10} textComponent={Text} format="{minutes}" />
+<FormattedDuration seconds={10} format="{minutes}" />
 // will render `0 minutes`
 
-<FormattedDuration seconds={30} textComponent={Text} format="{minutes}" />
+<FormattedDuration seconds={30} format="{minutes}" />
 // will render `1 minute`
 
-<FormattedDuration seconds={70} textComponent={Text} format="{minutes}" />
+<FormattedDuration seconds={70} format="{minutes}" />
 // will render `1 minute`
 ```
 
@@ -122,11 +133,25 @@ export default MyComponent() {
   return (
     <FormattedDuration
       seconds={600}
-      textComponent={Text}
       format={messages.customFormat.id}
     />
   );
 }
+```
+
+#### Unit display
+
+While `format` allows to select which units to render, `unitDisplay` allows to configure the way each unit is rendered.
+
+```js
+<FormattedDuration seconds={60} unitDisplay="long" />
+// will render `1 minute`
+
+<FormattedDuration seconds={60} unitDisplay="short" />
+// will render `1 min`
+
+<FormattedDuration seconds={60} unitDisplay="narrow" />
+// will render `1m`
 ```
 
 #### Timer format
@@ -135,7 +160,7 @@ export default MyComponent() {
 import FormattedDuration, { TIMER_FORMAT } from 'react-intl-formatted-duration';
 
 export default MyComponent() {
-  return <FormattedDuration seconds={60} textComponent={Text} format={TIMER_FORMAT} />
+  return <FormattedDuration seconds={60} format={TIMER_FORMAT} />
   // will render `1:00`
 }
 ```
@@ -152,7 +177,7 @@ export default MyComponent() {
 * `react-intl-formatted-duration.minutesUnit` string for formatting minutes, default `{value, plural, one {minute} other {minutes}}`
 * `react-intl-formatted-duration.secondsUnit` string for formatting seconds, default `{value, plural, one {second} other {seconds}}`
 
-The messages for `daysUnit`, `hoursUnit`, `minutesUnit`, `secondsUnit` use the [format-js syntax](https://formatjs.io/guides/message-syntax/).
+The messages for `daysUnit`, `hoursUnit`, `minutesUnit`, `secondsUnit` use the [format-js syntax](https://formatjs.io/guides/message-syntax/) and are only used when `unitDisplay` is not specified.
 
 If you're using the `extract-intl` script from [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate) you can import `react-intl-formatted-duration/messages` to automatically generate the keys in your translation files.
 
@@ -164,3 +189,7 @@ Version `2.x` allows to use the whole power of format-js message syntax. All you
 ## Upgrading from version 2.0
 
 Version `3.x` has exactly the same API as version `2.x` but is a complete rewrite. You don't need to change your code.
+
+## Upgrading from version 3.0
+
+Version `4.x` doesn't change any of the default behavior of version `3.x` and only contains new features. However internally it bumps the version of `intl-unofficial-duration-unit-format` from `1.x` to `3.x` which now requires `Intl.NumberFormat` to be available globally. If you've installed `react-intl` correctly, chances are you don't need to change your code.

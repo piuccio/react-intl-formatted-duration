@@ -41,6 +41,7 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.3.0",
+    "babel-loader": "8.1.0",
     "codecov": "3.6.5",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
@@ -51,7 +52,7 @@
     "react-dom": "16.13.1",
     "react-intl": "4.3.1",
     "react-test-renderer": "16.13.1",
-    "rollup": "2.4.0",
+    "rollup": "2.6.0",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-filesize": "7.0.0",
@@ -73,6 +74,6 @@
     }
   },
   "dependencies": {
-    "intl-unofficial-duration-unit-format": "1.1.0"
+    "intl-unofficial-duration-unit-format": "3.0.0"
   }
 }
